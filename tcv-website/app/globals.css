@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #050510;
+  --bg-secondary: #0a0a1f;
+  --cyan-glow: #00f5ff;
+  --amber-accent: #ffab00;
+  --text-primary: #f0f4ff;
+  --text-muted: #6b7280;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(0, 245, 255, 0.08);
+  --grain-opacity: 0.035;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.15); border-radius: 2px; }
+
+::selection {
+  background: rgba(0, 245, 255, 0.2);
+  color: var(--text-primary);
+}
+
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-hover {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-hover:hover {
+  border-color: var(--cyan-glow);
+  box-shadow: 0 0 30px rgba(0, 245, 255, 0.1);
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.5); opacity: 0.8; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+.pulse-ring {
+  animation: pulse-ring 2.5s ease-out infinite;
+}
+.pulse-ring:nth-child(2) { animation-delay: 0.8s; }
+.pulse-ring:nth-child(3) { animation-delay: 1.6s; }
+
+#flatline-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+.card-container {
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.card-container:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.form-input {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  width: 100%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--cyan-glow);
+  box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.1);
+}
+
+.form-input::placeholder { color: var(--text-muted); }
+.form-input option { background: #0a0a1f; color: var(--text-primary); }
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.3; }
+}
+
+.scroll-indicator {
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.scanline {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,245,255,0.03), transparent);
+  pointer-events: none;
+  z-index: 9998;
+  animation: scanline 8s linear infinite;
+}
+
+.divider-cyan {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan-glow), transparent);
+  opacity: 0.2;
+}
+
+#radar-svg circle, #radar-svg line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+/* ─── FONT DEFINITIONS (with system fallbacks) ──────────────── */
+:root {
+  --font-space-grotesk: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-inter: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-jetbrains: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+}
