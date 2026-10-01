@@ -1,8 +1,8 @@
-import type { NextConfig } from "next"
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
-  turbopack: {},
+  turbopack: { root: __dirname },
 }
 
 export default nextConfig

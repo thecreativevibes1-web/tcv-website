@@ -1,49 +1,8 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
+import { Geist, Geist_Mono } from 'next/font/google'
 import { SmoothScrollProvider } from '@/components/SmoothScrollProvider'
 import './globals.css'
-
-export const metadata: Metadata = {
-  title: 'The Creative Vibes — Signal Active',
-  description: 'We architect the systems that make clients find you. Web Design · AI Automation · Lead Generation.',
-  keywords: ['web design', 'AI automation', 'lead generation', 'marketing agency', 'India'],
-  openGraph: {
-    title: 'The Creative Vibes — Signal Active',
-    description: 'Most businesses are invisible. We change that.',
-    type: 'website',
-  },
-}
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <Script
-          id="clarity"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_ID || ''}");
-            `,
-          }}
-        />
-      </head>
-      <body style={{ backgroundColor: 'var(--bg-primary)' }}>
-        <div className="scanline" aria-hidden="true" />
-        <SmoothScrollProvider>
-          {children}
-        </SmoothScrollProvider>
-      </body>
-    </html>
-  )
-}
+const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
+const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono' })
+export const metadata: Metadata = { title: 'New Creation Hubs — We Create. We Build. We Grow.', description: 'New Creation Hubs turns ambitious ideas into brands, digital products, AI systems and scalable businesses.', openGraph: { title: 'New Creation Hubs', description: 'We Create. We Build. We Grow.', type: 'website' } }
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en" className={`${geist.variable} ${mono.variable}`}><body><SmoothScrollProvider>{children}</SmoothScrollProvider></body></html> }
