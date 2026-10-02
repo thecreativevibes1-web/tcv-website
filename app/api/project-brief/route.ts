@@ -7,7 +7,7 @@ const BUDGETS=['Under ₹50k','₹50k – ₹1L','₹1L – ₹3L','₹3L – �
 const TIMELINES=['ASAP','2–4 weeks','1–2 months','2–3 months','3+ months','Flexible']
 
 function clean(value:unknown,max:number){return typeof value==='string'?value.trim().slice(0,max):''}
-function emailOk(value:string){return /^[^s@]+@[^s@]+.[^s@]+$/.test(value)}
+function emailOk(value:string){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)}
 function escapeHtml(value:string){return value.replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]||char))}
 function scoreBrief(input:{company:string;what_building:string;project_type:string;budget_range:string;timeline:string;goals:string;additional_details:string;email:string}){
   let score=0
