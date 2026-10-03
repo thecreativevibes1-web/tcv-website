@@ -1,0 +1,33 @@
+.journey{contain:layout style;will-change:transform}
+html{scroll-padding-top:118px}
+.work-rail{scroll-behavior:smooth}
+.work-panel{scroll-snap-align:start}
+@media(max-width:800px){
+html{scroll-padding-top:126px}
+body{touch-action:pan-y}
+[data-motion-section]{scroll-margin-top:126px}
+.work-canvas{touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch}
+.work-rail{scroll-snap-type:x proximity;overscroll-behavior-inline:contain}
+.work-panel{scroll-snap-align:center;transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .35s,background .35s}
+.work-panel:active{transform:scale(.988)}
+.service-list button{touch-action:manipulation;transition:padding .35s ease,background .35s}
+.service-list button:active{background:rgba(237,240,233,.035);padding-left:7px;padding-right:7px}
+.magnetic{touch-action:manipulation}
+.nav-cta{min-height:42px}
+.chapter-title{font-size:clamp(3.25rem,16vw,7rem);line-height:.84}
+.hero-bottom>p{font-size:13px}
+}
+@media(max-width:520px){
+.journey-item{scroll-snap-align:center}
+.hero-title{letter-spacing:-.095em}
+.hero-stage{height:225vh}
+.idea-stage{height:315vh}
+.create-stage{height:465px}
+.build-stage{min-height:510px}
+.grow-stage{min-height:760px}
+.proof-stage{padding-top:88px}
+}
+@media(prefers-reduced-motion:reduce){
+.work-rail{scroll-behavior:auto}
+.work-panel{scroll-snap-align:none}
+}
