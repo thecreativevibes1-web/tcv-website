@@ -71,7 +71,7 @@ export function ProjectBriefEngine(){
   return <section id="contact" data-motion-section data-motion-id="contact" className="brief-stage" aria-labelledby="brief-title">
     <div className="shell brief-shell">
       <div className="brief-top">
-        <div><p className="eyebrow">11 / CONVERSION / PROJECT BRIEF ENGINE</p><h2 id="brief-title">START<br/><span>CREATION.</span></h2></div>
+        <div><p className="eyebrow">10 / CONVERSION / PROJECT BRIEF ENGINE</p><h2 id="brief-title">START<br/><span>CREATION.</span></h2></div>
         <div className="brief-intro-copy"><span>ONE BRIEF. ONE CLEARER START.</span><p>Tell us what you are building. We qualify the opportunity, route it into the right offer and create a structured lead for the next conversation.</p></div>
       </div>
 

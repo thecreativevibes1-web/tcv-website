@@ -7,7 +7,12 @@ const chapters = [
   ['02', 'CREATE', 'create-chapter'],
   ['03', 'BUILD', 'build-chapter'],
   ['04', 'GROW', 'grow-chapter'],
-  ['05', 'WORK', 'work'],
+  ['05', 'SERVICES', 'services'],
+  ['06', 'WORK', 'work'],
+  ['07', 'ECOSYSTEM', 'ecosystem'],
+  ['08', 'PROCESS', 'process'],
+  ['09', 'PROOF / ABOUT', 'proof'],
+  ['10', 'START A PROJECT', 'contact'],
 ] as const
 
 export function JourneyIndicator() {
