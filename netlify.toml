@@ -1,0 +1,13 @@
+# Netlify deployment — standard Next.js 14 runtime (no static export).
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NEXT_TELEMETRY_DISABLED = "1"
+  # playwright is a dev-only verification tool; skip its browser download in CI
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"

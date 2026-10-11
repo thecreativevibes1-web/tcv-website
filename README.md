@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# New Creation Hubs — Creation Engine Landing Experience
 
-## Getting Started
+A cinematic, scroll-driven 3D landing experience for **New Creation Hubs (NCH)** —
+*We Create. We Build. We Grow.*
 
-First, run the development server:
+One continuous WebGL universe (procedural core, morphing particle formations, orbital
+rings, engineered networks) carries six narrative acts — Imagination, Design,
+Engineering, Intelligence, Growth, The Invitation — plus five interactive service
+worlds and a working project-inquiry form. Includes a skippable 10-second opening
+cinematic, scroll choreography (bidirectionally safe), reduced-motion support,
+WebGL fallback, an optional synthesized sound layer, and adaptive quality tiers.
+
+## Stack
+
+- **Next.js 14** (App Router, TypeScript, static-prerendered page)
+- **React Three Fiber 8** + **Three.js** + custom **GLSL** shaders
+- **GSAP 3** — intro cinematic timeline
+- **@react-three/postprocessing** — bloom / chromatic aberration / vignette
+- **Tailwind CSS 3**
+- **Web Audio API** — synthesized ambience (no audio assets)
+
+## Requirements
+
+- Node.js **≥ 18.18** (Node 20 recommended)
+- npm 9+
+- **Network access during the first build** — `next/font/google` downloads the
+  self-hosted fonts (Space Grotesk, Inter, IBM Plex Mono) at build time, then caches them.
+
+## Install & run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm ci          # install from the lockfile (recommended)
+# or: npm install
+
+npm run dev     # development server  → http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # production build → .next/
+npm start       # serve the production build → http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment variables
 
-## Learn More
+**None required.** The site is fully client-side; the contact form delivers via the
+visitor's own email client (prefilled `mailto:` brief + copy-to-clipboard) by design —
+no silent backend, no fake "sent" state. See `.env.example` for optional future hooks.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy to Netlify
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This is a standard Next.js 14 project — deploy as-is (do **not** use static export;
+the Netlify Next.js runtime handles everything):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push this folder to a Git repo (or drag-and-drop the folder in Netlify).
+2. Netlify auto-detects Next.js. `netlify.toml` is already included:
+   - build command: `npm run build`
+   - publish: `.next`
+   - plugin: `@netlify/plugin-nextjs`
+   - `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1` (skips the optional test-browser download)
+   - `NODE_VERSION=20`
+3. No environment variables need to be configured.
 
-## Deploy on Vercel
+### Optional: pure static hosting
+Every route is client-rendered/prerendered, so `output: 'export'` is *technically*
+possible — but it is **not recommended or preconfigured**: it would drop the Next.js
+runtime features, future API routes (e.g. a real contact endpoint) and image/font
+optimisation. Deploy with the Netlify Next.js runtime instead.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+nch/
+├── src/
+│   ├── app/                  layout, page, globals.css, icon.svg
+│   ├── lib/                  store/choreography model · formations · GLSL · audio engine
+│   └── components/
+│       ├── Experience.tsx    scroll model, intro timeline, quality tiers, fallbacks
+│       ├── scene/            Universe (rig/effects) · Particles · Engine
+│       └── dom/              Chrome (nav/rail/menu/cursor) · Acts · Services · Contact
+├── scripts/                  Playwright verification suites (dev only)
+├── netlify.toml              Netlify deploy config
+├── REPORT.md                 build + verification report
+└── package.json / package-lock.json
+```
+
+## Verification scripts (optional, dev only)
+
+Headless-browser checks used during development (requires `npx playwright install chromium`):
+
+```bash
+node scripts/verify.mjs    # full journey + screenshots → shots/
+node scripts/verify2.mjs   # mobile, reduced-motion, forms, interactions
+```
+
+They are not part of the production build. To install dependencies without the
+Playwright browser download: `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci`.
+
+## Notes
+
+- All visuals are procedural (shaders + math) — there are no image/texture assets to ship.
+- For the full feature/verification matrix see `REPORT.md`.
